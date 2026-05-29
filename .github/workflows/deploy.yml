@@ -22,8 +22,7 @@ jobs:
               
               git pull origin main
              
-              docker stop cicd-app || true
-              docker rm cicd-app || true
+              docker-compose down
+
+              docker-compose up -d --build
         
-              docker build -t cicd-app .
-              docker run -d --restart always -p 3000:3000 --name cicd-app cicd-app

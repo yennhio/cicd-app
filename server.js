@@ -1,5 +1,19 @@
 const app = require("./app");
+const { waitForDB, initDB } = require("./src/db/init");
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+async function startServer() {
+  try {
+    await waitForDB();   // 👈 FIRST
+    await initDB();      // 👈 THEN schema
+
+    app.listen(3000, () => {
+      console.log("Server running");
+    });
+
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+}
+
+startServer();
