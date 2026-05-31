@@ -33,10 +33,6 @@ jobs:
            with:
               node-version: 18
          - run: npm install
-         - name: Create test database
-           run: psql -h localhost -U postgres -c "CREATE DATABASE incidents_test;"
-           env:
-              PGPASSWORD: postgres
          - run: npm test
 
    deploy:
