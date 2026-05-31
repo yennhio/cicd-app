@@ -3,8 +3,8 @@ const { waitForDB, initDB } = require("./src/db/init");
 
 async function startServer() {
   try {
-    await waitForDB();   // 👈 FIRST
-    await initDB();      // 👈 THEN schema
+    await waitForDB();   // wait for db
+    await initDB();      // then schema
 
     app.listen(3000, () => {
       console.log("Server running");
