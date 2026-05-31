@@ -43,7 +43,7 @@ router.patch("/:id", async (req, res) => {
   const { status } = req.body;
   
   if (!status){
-    return res.status(400).json({"Missing status field"});
+    return res.status(400).json({error: "Missing status field"});
 }
 
   try {
