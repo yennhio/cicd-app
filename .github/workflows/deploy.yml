@@ -7,6 +7,41 @@ on:
 
 
 jobs:
+   test:
+      runs-on: ubuntu-latest
+   
+   services:
+      postgres:
+         image: postgres:16
+         env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: incidents_test
+         ports:
+            - 5432:5432
+         options >-
+            --health-cmd pg_isready
+            --health-interval 5s
+            --health-timeout 5s
+            --health-retries 10
+   env:
+      DB_HOST: localhost
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: incidents_test
+
+   steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+           node-version: 18
+      - run: npm install
+      - name: Create test database
+        run: psql -h localhost -U postgres -c "CREATE DATABASE incidents_test;"
+        env:
+           PGPASSWORD: postgres
+      - run: npm test
+
    deploy:
       runs-on: ubuntu-latest
 
