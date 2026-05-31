@@ -17,8 +17,9 @@ async function initDB() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS incidents (
       id SERIAL PRIMARY KEY,
-      title TEXT,
-      description TEXT,
+      title TEXT NOT NULL,
+      severity TEXT NOT NULL,
+      status TEXT NOT FULL DEFAULT 'open',
       created_at TIMESTAMP DEFAULT NOW()
     );
   `);
