@@ -19,7 +19,7 @@ async function initDB() {
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
       severity TEXT NOT NULL,
-      status TEXT NOT FULL DEFAULT 'open',
+      status TEXT NOT NULL DEFAULT 'open',
       created_at TIMESTAMP DEFAULT NOW()
     );
   `);
